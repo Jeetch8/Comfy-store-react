@@ -1,5 +1,4 @@
-import ProductsGrid from "./ProductsGrid";
-import SectionTitle from "./SectionTitle";
+import { ProductsGrid, SectionTitle } from "../Components";
 const FeaturedProducts = () => {
   return (
     <div className="pt-24 ">
