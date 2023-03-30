@@ -2,11 +2,10 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      daisyui: {
-        themes: ["winter", "dracula"],
-      },
-    },
+    extend: {},
   },
-  plugins: [require("daisyui"), require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  daisyui: {
+    themes: ["winter", "dracula"],
+  },
 };
