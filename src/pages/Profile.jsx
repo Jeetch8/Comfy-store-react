@@ -12,7 +12,7 @@ const Profile = () => {
   const locationArr = location.pathname.split("/");
 
   return (
-    <div className="grid grid-cols-2">
+    <div className="flex gap-x-7 w-full">
       <div>
         <ul className="menu bg-base-200 w-56 rounded-box">
           <li onClick={() => naviagte("/profile")}>

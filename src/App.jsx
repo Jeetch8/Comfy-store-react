@@ -9,7 +9,6 @@ import {
   HomeLayout,
   Landing,
   Login,
-  Orders,
   Products,
   Register,
   SingleProduct,
@@ -30,7 +29,7 @@ import { loader as landingLoader } from "./pages/Landing";
 import { loader as singleProductLoader } from "./pages/SingleProduct";
 import { loader as productsLoader } from "./pages/Products";
 import { loader as checkoutLoader } from "./pages/Checkout";
-import { loader as ordersLoader } from "./pages/Orders";
+import { loader as ordersLoader } from "./components/Profile/Orders";
 // actions
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
@@ -81,6 +80,7 @@ const router = createBrowserRouter([
           {
             path: "orders",
             element: <ProfileOrdersCol />,
+            loader: ordersLoader(store, queryClient),
           },
         ],
       },
@@ -109,11 +109,6 @@ const router = createBrowserRouter([
         element: <Checkout />,
         loader: checkoutLoader(store),
         action: checkoutAction(store, queryClient),
-      },
-      {
-        path: "orders",
-        element: <Orders />,
-        loader: ordersLoader(store, queryClient),
       },
     ],
   },
