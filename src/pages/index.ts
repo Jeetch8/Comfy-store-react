@@ -9,3 +9,4 @@ export { default as Products } from "./Products";
 export { default as Register } from "./Register";
 export { default as SingleProduct } from "./SingleProduct";
 export { default as Profile } from "./Profile";
+export { default as WishList } from "./WishList";

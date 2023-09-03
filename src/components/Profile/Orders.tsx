@@ -1,11 +1,7 @@
 import { redirect, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import { customFetch } from "../../utils";
-import {
-  OrdersList,
-  ComplexPaginationContainer,
-  SectionTitle,
-} from "../../components";
+import { OrdersList, ComplexPaginationContainer, SectionTitle } from "..";
 
 const ordersQuery = (params, user) => {
   return {

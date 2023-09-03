@@ -1,5 +1,5 @@
 import React from "react";
-import { FormInput } from "../../components";
+import { FormInput } from "..";
 import { Form } from "react-router-dom";
 
 const Address = () => {

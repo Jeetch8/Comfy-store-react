@@ -13,6 +13,7 @@ import {
   Register,
   SingleProduct,
   Profile,
+  WishList,
 } from "./pages";
 
 import {
@@ -55,6 +56,12 @@ const router = createBrowserRouter([
         element: <Landing />,
         errorElement: <ErrorElement />,
         loader: landingLoader(queryClient),
+      },
+      {
+        path: "wishlist",
+        element: <WishList />,
+        errorElement: <ErrorElement />,
+        loader: productsLoader(queryClient),
       },
       {
         path: "profile",

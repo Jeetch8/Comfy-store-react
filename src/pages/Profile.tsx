@@ -1,10 +1,4 @@
-import React from "react";
-import {
-  Outlet,
-  useLocation,
-  useNavigate,
-  useNavigation,
-} from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const location = useLocation();
