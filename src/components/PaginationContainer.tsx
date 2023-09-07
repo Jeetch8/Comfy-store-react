@@ -1,7 +1,8 @@
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { IProductSearchResult } from "../types/Product";
 
 const PaginationContainer = () => {
-  const { meta } = useLoaderData();
+  const { meta } = useLoaderData() as IProductSearchResult;
   const { pageCount, page } = meta.pagination;
 
   const pages = Array.from({ length: pageCount }, (_, index) => {
@@ -9,19 +10,19 @@ const PaginationContainer = () => {
   });
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber: number) => {
     const searchParams = new URLSearchParams(search);
-    searchParams.set('page', pageNumber);
+    searchParams.set("page", String(pageNumber));
     navigate(`${pathname}?${searchParams.toString()}`);
   };
 
   if (pageCount < 2) return null;
 
   return (
-    <div className='mt-16 flex justify-end'>
-      <div className='join'>
+    <div className="mt-16 flex justify-end">
+      <div className="join">
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className="btn btn-xs sm:btn-md join-item"
           onClick={() => {
             let prevPage = page - 1;
             if (prevPage < 1) prevPage = pageCount;
@@ -36,7 +37,7 @@ const PaginationContainer = () => {
               key={pageNumber}
               onClick={() => handlePageChange(pageNumber)}
               className={`btn btn-xs sm:btn-md border-none join-item ${
-                pageNumber === page ? 'bg-base-300 border-base-300 ' : ''
+                pageNumber === page ? "bg-base-300 border-base-300 " : ""
               }`}
             >
               {pageNumber}
@@ -44,7 +45,7 @@ const PaginationContainer = () => {
           );
         })}
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className="btn btn-xs sm:btn-md join-item"
           onClick={() => {
             let nextPage = page + 1;
             if (nextPage > pageCount) nextPage = 1;

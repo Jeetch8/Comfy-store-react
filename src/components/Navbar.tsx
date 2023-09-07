@@ -6,6 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/user/userSlice";
 import { FaRegHeart } from "react-icons/fa";
+import { RootState } from "../store";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ const Navbar = () => {
     dispatch(toggleTheme());
   };
 
-  const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
+  const numItemsInCart = useSelector(
+    (state: RootState) => state.cartState.numItemsInCart
+  );
 
   return (
     <nav className="bg-base-200">

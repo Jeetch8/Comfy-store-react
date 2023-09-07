@@ -1,8 +1,22 @@
-const FormSelect = ({ label, name, list, defaultValue, size }) => {
+interface IFormSelectProps {
+  label: string;
+  name: string;
+  list: string[];
+  defaultValue: string;
+  size: string;
+}
+
+const FormSelect = ({
+  label,
+  name,
+  list,
+  defaultValue,
+  size,
+}: IFormSelectProps) => {
   return (
-    <div className='form-control'>
-      <label htmlFor={name} className='label'>
-        <span className='label-text capitalize'>{label}</span>
+    <div className="form-control">
+      <label htmlFor={name} className="label">
+        <span className="label-text capitalize">{label}</span>
       </label>
       <select
         name={name}

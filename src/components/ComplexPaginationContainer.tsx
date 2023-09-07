@@ -1,24 +1,31 @@
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { IProductSearchResult } from "../types/Product";
 
 const ComplexPaginationContainer = () => {
-  const { meta } = useLoaderData();
+  const { meta } = useLoaderData() as IProductSearchResult;
   const { pageCount, page } = meta.pagination;
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber: number) => {
     const searchParams = new URLSearchParams(search);
-    searchParams.set('page', pageNumber);
+    searchParams.set("page", String(pageNumber));
     navigate(`${pathname}?${searchParams.toString()}`);
   };
 
-  const addPageButton = ({ pageNumber, activeClass }) => {
+  const addPageButton = ({
+    pageNumber,
+    activeClass,
+  }: {
+    pageNumber: number;
+    activeClass: boolean;
+  }) => {
     return (
       <button
         key={pageNumber}
         onClick={() => handlePageChange(pageNumber)}
         className={`btn btn-xs sm:btn-md border-none join-item ${
-          activeClass ? 'bg-base-300 border-base-300 ' : ''
+          activeClass ? "bg-base-300 border-base-300 " : ""
         }`}
       >
         {pageNumber}
@@ -34,7 +41,7 @@ const ComplexPaginationContainer = () => {
     // dots
     if (page > 2) {
       pageButtons.push(
-        <button className='join-item btn btn-xs sm:btn-md' key='dots-1'>
+        <button className="join-item btn btn-xs sm:btn-md" key="dots-1">
           ...
         </button>
       );
@@ -47,7 +54,7 @@ const ComplexPaginationContainer = () => {
     // dots
     if (page < pageCount - 1) {
       pageButtons.push(
-        <button className='join-item btn btn-xs sm:btn-md' key='dots-2'>
+        <button className="join-item btn btn-xs sm:btn-md" key="dots-2">
           ...
         </button>
       );
@@ -63,10 +70,10 @@ const ComplexPaginationContainer = () => {
   if (pageCount < 2) return null;
 
   return (
-    <div className='mt-16 flex justify-end'>
-      <div className='join'>
+    <div className="mt-16 flex justify-end">
+      <div className="join">
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className="btn btn-xs sm:btn-md join-item"
           onClick={() => {
             let prevPage = page - 1;
             if (prevPage < 1) prevPage = pageCount;
@@ -77,7 +84,7 @@ const ComplexPaginationContainer = () => {
         </button>
         {renderPageButtons()}
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className="btn btn-xs sm:btn-md join-item"
           onClick={() => {
             let nextPage = page + 1;
             if (nextPage > pageCount) nextPage = 1;

@@ -1,14 +1,15 @@
-import { FeaturedProducts, Hero } from '../components';
+import { QueryClient } from "@tanstack/react-query";
+import { FeaturedProducts, Hero } from "../components";
 
-import { customFetch } from '../utils';
-const url = '/products?featured=true';
+import { customFetch } from "../utils";
+const url = "/products?featured=true";
 
 const featuredProductsQuery = {
-  queryKey: ['featuredProducts'],
+  queryKey: ["featuredProducts"],
   queryFn: () => customFetch(url),
 };
 
-export const loader = (queryClient) => async () => {
+export const loader = (queryClient: QueryClient) => async () => {
   const response = await queryClient.ensureQueryData(featuredProductsQuery);
 
   const products = response.data.data;

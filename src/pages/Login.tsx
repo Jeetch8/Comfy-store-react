@@ -1,13 +1,20 @@
 import { FormInput, SubmitBtn } from "../components";
-import { Form, Link, redirect, useNavigate } from "react-router-dom";
+import {
+  Form,
+  Link,
+  redirect,
+  useNavigate,
+  ActionFunctionArgs,
+} from "react-router-dom";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import { loginUser } from "../features/user/userSlice";
 import { useDispatch } from "react-redux";
+import { Store } from "@reduxjs/toolkit";
 
 export const action =
-  (store) =>
-  async ({ request }) => {
+  (store: Store) =>
+  async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
 
@@ -16,7 +23,7 @@ export const action =
       store.dispatch(loginUser(response.data));
       toast.success("logged in successfully");
       return redirect("/");
-    } catch (error) {
+    } catch (error: any) {
       const errorMessage =
         error?.response?.data?.error?.message ||
         "please double check your credentials";

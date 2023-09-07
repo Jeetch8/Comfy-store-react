@@ -1,29 +1,13 @@
-interface IProduct {
-  id: number;
-  attributes: {
-    catrgory: string;
-    colors: string[];
-    company: string;
-    createdAt: string;
-    description: string;
-    featured: boolean;
-    image: string;
-    price: string;
-    publishedAt: string;
-    shipping: boolean;
-    title: string;
-    updatedAt: string;
-  };
-}
-
 import React from "react";
-import { useLoaderData, Params } from "react-router-dom";
+import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
 import { formatPrice, customFetch, generateAmountOptions } from "../utils";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
 import { QueryClient } from "@tanstack/react-query";
+import { IProduct } from "../types/Product";
+import { ICartProduct } from "../types/Cart";
 
 const singleProductQuery = (id: string) => {
   return {
@@ -34,9 +18,9 @@ const singleProductQuery = (id: string) => {
 
 export const loader =
   (queryClient: QueryClient) =>
-  async ({ params }: { params: Params<"id"> }) => {
+  async ({ params }: LoaderFunctionArgs) => {
     const response = await queryClient.ensureQueryData(
-      singleProductQuery(params?.id!)
+      singleProductQuery(params.id!)
     );
 
     return { product: response.data.data };
@@ -55,7 +39,7 @@ const SingleProduct = () => {
     setAmount(parseInt(e.target.value));
   };
 
-  const cartProduct = {
+  const cartProduct: ICartProduct = {
     cartID: product.id + productColor,
     productID: product.id,
     image,

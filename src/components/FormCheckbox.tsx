@@ -1,11 +1,23 @@
-const FormCheckbox = ({ label, name, defaultValue, size }) => {
+interface IFormCheckboxProps {
+  label: string;
+  name: string;
+  defaultValue: boolean;
+  size: string;
+}
+
+const FormCheckbox = ({
+  label,
+  name,
+  defaultValue,
+  size,
+}: IFormCheckboxProps) => {
   return (
-    <div className='form-control items-center'>
-      <label htmlFor={name} className='label cursor-pointer'>
-        <span className='label-text capitalize'>{label}</span>
+    <div className="form-control items-center">
+      <label htmlFor={name} className="label cursor-pointer">
+        <span className="label-text capitalize">{label}</span>
       </label>
       <input
-        type='checkbox'
+        type="checkbox"
         name={name}
         defaultChecked={defaultValue}
         className={`checkbox checkbox-primary ${size}`}

@@ -1,4 +1,3 @@
-import React from "react";
 import { RiVisaFill } from "react-icons/ri";
 
 const PaymentMethods = () => {

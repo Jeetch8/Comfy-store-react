@@ -1,18 +1,19 @@
-import { useLoaderData } from 'react-router-dom';
-import day from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
+import { useLoaderData } from "react-router-dom";
+import day from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import { IOrderRequestResult } from "../types/Orders";
 day.extend(advancedFormat);
 
 const OrdersList = () => {
-  const { orders, meta } = useLoaderData();
+  const { orders, meta } = useLoaderData() as IOrderRequestResult;
 
   return (
-    <div className='mt-8'>
-      <h4 className='mb-4 capitalize'>
+    <div className="mt-8">
+      <h4 className="mb-4 capitalize">
         total orders : {meta.pagination.total}
       </h4>
-      <div className='overflow-x-auto'>
-        <table className='table table-zebra'>
+      <div className="overflow-x-auto">
+        <table className="table table-zebra">
           {/* head */}
           <thead>
             <tr>
@@ -20,7 +21,7 @@ const OrdersList = () => {
               <th>Address</th>
               <th>Products</th>
               <th>Cost</th>
-              <th className='hidden sm:block'>Date</th>
+              <th className="hidden sm:block">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -28,14 +29,14 @@ const OrdersList = () => {
               const id = order.id;
               const { name, address, numItemsInCart, orderTotal, createdAt } =
                 order.attributes;
-              const date = day(createdAt).format('hh:mm a - MMM Do, YYYY');
+              const date = day(createdAt).format("hh:mm a - MMM Do, YYYY");
               return (
                 <tr key={id}>
                   <td>{name}</td>
                   <td>{address}</td>
                   <td>{numItemsInCart}</td>
                   <td>{orderTotal}</td>
-                  <td className='hidden sm:block'>{date}</td>
+                  <td className="hidden sm:block">{date}</td>
                 </tr>
               );
             })}

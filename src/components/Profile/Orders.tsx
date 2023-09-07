@@ -1,15 +1,18 @@
-import { redirect, useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, redirect, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import { customFetch } from "../../utils";
 import { OrdersList, ComplexPaginationContainer, SectionTitle } from "..";
+import { QueryClient } from "@tanstack/react-query";
+import { IOrderRequestResult } from "../../types/Orders";
+import { ILocalStorageUser } from "../../features/user/userSlice";
+import { IProductSearchQueryParams } from "../../types/Product";
 
-const ordersQuery = (params, user) => {
+const ordersQuery = (
+  params: IProductSearchQueryParams,
+  user: ILocalStorageUser
+) => {
   return {
-    queryKey: [
-      "orders",
-      user.username,
-      params.page ? parseInt(params.page) : 1,
-    ],
+    queryKey: ["orders", user.username, params.page ? params.page : 1],
     queryFn: () =>
       customFetch.get("/orders", {
         params,
@@ -21,8 +24,8 @@ const ordersQuery = (params, user) => {
 };
 
 export const loader =
-  (store, queryClient) =>
-  async ({ request }) => {
+  (store: any, queryClient: QueryClient) =>
+  async ({ request }: LoaderFunctionArgs) => {
     const user = store.getState().userState.user;
 
     if (!user) {
@@ -38,7 +41,7 @@ export const loader =
       );
 
       return { orders: response.data.data, meta: response.data.meta };
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       const errorMessage =
         error?.response?.data?.error?.message ||
@@ -50,7 +53,7 @@ export const loader =
   };
 
 const Orders = () => {
-  const { meta } = useLoaderData();
+  const { meta } = useLoaderData() as IOrderRequestResult;
   if (meta.pagination.total < 1) {
     return <SectionTitle text="please make an order" />;
   }
